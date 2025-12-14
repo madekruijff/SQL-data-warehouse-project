@@ -2,7 +2,7 @@
 ===============================================================================================================================
 DDL (Data Definition Language): Creating Bronze Layer Tables
 ===============================================================================================================================
-Script purpose:
+Script Purpose:
 	This script creates the required schema named 'datawarehouse_baraa'. The schema will be destroyed if it exists and recreated.
   This script also creates all tables of the 'bronze' layer and drops tables if they already exist.
 
