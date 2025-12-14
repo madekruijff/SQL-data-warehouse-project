@@ -2,7 +2,7 @@
 ============================================================================================================
 DDL (Data Definition Language) Script: Creating Silver Layer Tables
 ============================================================================================================
-Scipt purpose:
+Scipt Purpose:
     This script creates all tables of the 'silver' schema, dropping existing tables if they already exist.
     Running this script will create altered versions of the bronze layer tables, providing scaffolds for 
     cleaned and transformed data.
