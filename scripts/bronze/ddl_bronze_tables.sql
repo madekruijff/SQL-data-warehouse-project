@@ -1,0 +1,104 @@
+/*
+===============================================================================================================================
+DDL (Data Definition Language): Creating Bronze Layer Tables
+===============================================================================================================================
+Script purpose:
+	This script creates the required schema named 'datawarehouse_baraa'. The schema will be destroyed if it exists and recreated.
+  This script also creates all tables of the 'bronze' layer and drops tables if they already exist.
+
+    Run this script to re-create the DDL structure of the 'bronze' tables
+
+ WARNING:
+	Running this script will destroy the existing 'datawarehouse_baraa' schema, as well as all tables, and all data will be permanently lost.
+===============================================================================================================================
+*/    
+
+
+--Creating the Database 'datawarehouse_baraa'
+USE master;
+
+DROP DATABASE IF EXISTS datawarehouse_baraa;
+CREATE DATABASE datawarehouse_baraa;
+
+USE datawarehouse_baraa;
+
+
+--Creating schemas
+CREATE SCHEMA bronze;
+GO
+
+CREATE SCHEMA silver;
+GO
+
+CREATE SCHEMA gold;
+
+
+--Creating the defined Bronze Tables
+IF OBJECT_ID ('bronze.crm_cust_info', 'U') IS NOT NULL
+    DROP TABLE bronze.crm_cust_info;
+CREATE Table bronze.crm_cust_info(
+	cst_id INT,
+    cst_key NVARCHAR(50),
+    cst_firstname NVARCHAR(50),
+    cst_lastname NVARCHAR(50),
+    cst_marital_status NVARCHAR(50),
+    cst_gndr NVARCHAR(50),
+    cst_create_date DATE
+);
+GO
+
+IF OBJECT_ID ('bronze.crm_prd_info', 'U') IS NOT NULL
+    DROP TABLE bronze.crm_prd_info;
+CREATE Table bronze.crm_prd_info(
+    prd_id INT,
+    prd_key NVARCHAR(50),
+    prd_nm NVARCHAR(50),
+    prd_cost INT,
+    prd_line NVARCHAR(50),
+    prd_start_dt DATETIME,
+    prd_end_dt DATETIME
+);
+GO
+
+
+IF OBJECT_ID ('bronze.crm_sales_details', 'U') IS NOT NULL
+    DROP TABLE bronze.crm_sales_details;
+CREATE Table bronze.crm_sales_details(
+    sls_ord_num NVARCHAR(50),
+    sls_prd_key NVARCHAR(50),
+    sls_cust_id INT,
+    sls_order_dt INT,
+    sls_ship_dt INT,
+    sls_due_dt INT,
+    sls_sales INT,
+    sls_quantity INT,
+    sls_price INT
+);
+GO
+
+IF OBJECT_ID ('bronze.erp_cust_az12', 'U') IS NOT NULL
+    DROP TABLE bronze.erp_cust_az12;
+CREATE Table bronze.erp_cust_az12(
+    cid NVARCHAR(50),
+    bdate DATE,
+    gen NVARCHAR(50)
+);
+GO
+
+IF OBJECT_ID ('bronze.erp_loc_a101', 'U') IS NOT NULL
+    DROP TABLE bronze.erp_loc_a101;
+CREATE Table bronze.erp_loc_a101(
+    cid NVARCHAR(50),
+    cntry NVARCHAR(50)
+);
+GO
+
+IF OBJECT_ID ('bronze.erp_px_cat_g1v2', 'U') IS NOT NULL
+    DROP TABLE bronze.erp_px_cat_g1v2;
+CREATE Table bronze.erp_px_cat_g1v2(
+    id NVARCHAR(50),
+    cat NVARCHAR(50),
+    subcat NVARCHAR(50),
+    maintenance NVARCHAR(50)
+);
+
